@@ -12,18 +12,32 @@ const KirkiInputSliderForm = (props) => {
     return value;
   };
 
+  // const getValueObject = (value) => {
+  //   value = "string" !== typeof value ? value.toString() : value;
+
+  //   const valueUnit = value.replace(/\d+/g, "");
+  //   let valueNumber = value.replace(valueUnit, "");
+
+  //   valueNumber = parseFloat(valueNumber.trim());
+  //   valueNumber = validateValue(valueNumber);
+
+  //   return {
+  //     number: valueNumber,
+  //     unit: valueUnit,
+  //   };
+  // };
   const getValueObject = (value) => {
-    value = "string" !== typeof value ? value.toString() : value;
-
-    const valueUnit = value.replace(/\d+/g, "");
-    let valueNumber = value.replace(valueUnit, "");
-
-    valueNumber = parseFloat(valueNumber.trim());
-    valueNumber = validateValue(valueNumber);
-
+    value = typeof value !== "string" ? value.toString() : value;
+    // 使用正则表达式分离数值和单位
+    const matches = value.match(/^([\d.]+)(.*)$/);
+    let number = matches ? parseFloat(matches[1]) : 0;
+    const unit = matches ? matches[2] : "";
+    
+    number = validateValue(number);
+    
     return {
-      number: valueNumber,
-      unit: valueUnit,
+      number,
+      unit,
     };
   };
 
