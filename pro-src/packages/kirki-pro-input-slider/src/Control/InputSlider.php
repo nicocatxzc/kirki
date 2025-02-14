@@ -71,9 +71,13 @@ class InputSlider extends Base {
 
 		// If the value includes the unit, then replace the `value_unit` (set from choice) with unit from value.
 		if ( ! is_numeric( $this->value() ) ) {
-			$this->value_unit   = preg_replace( '/\d+/', '', $this->value() );
-			$this->value_number = str_ireplace( $this->value_unit, '', $this->value() );
-			$this->value_number = (float) $this->value_number;
+			if ( preg_match( '/^([\d\.]+)(.*)$/', $this->value(), $matches ) ) {
+				$this->value_number = (float) $matches[1];
+				$this->value_unit   = $matches[2];
+			} else {
+				$this->value_number = 0;
+				$this->value_unit   = '';
+			}
 		} else {
 			$this->value_number = (float) $this->value();
 		}
