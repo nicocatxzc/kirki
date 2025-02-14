@@ -75,7 +75,7 @@ $kirki->modules = new Modules();
 // Instantiate classes.
 new Kirki();
 new L10n( 'kirki', __DIR__ . '/languages' );
-new \Kirki\Settings\SetupSettings();
+//移除后台设置 new \Kirki\Settings\SetupSettings();
 
 // ? Bagus: Do we really need to-reinclude this file? It was included above.
 // Include the ariColor library.
@@ -92,7 +92,7 @@ if ( file_exists( $custom_config_path ) ) {
 }
 
 // Add upgrade notifications.
-require_once wp_normalize_path( dirname( __FILE__ ) . '/upgrade-notifications.php' ); // phpcs:ignore WPThemeReview.CoreFunctionality.FileInclude
+// 移除升级提示 require_once wp_normalize_path( dirname( __FILE__ ) . '/upgrade-notifications.php' ); // phpcs:ignore WPThemeReview.CoreFunctionality.FileInclude
 
 /**
  * To enable tests, add this line to your wp-config.php file (or anywhere alse):
